@@ -47,7 +47,23 @@
 
 ## 工具安装
 
-`tools/` 下的工具需要单独下载安装，详见各子目录的 `README.md`。常用工具的下载链接和安装说明已在对应目录中提供。
+一键安装所有工具：
+
+```powershell
+.\scripts\misc\install_tools.ps1 -All
+```
+
+支持按类别安装：
+
+```powershell
+.\scripts\misc\install_tools.ps1 -CTF        # Web CTF 工具 (sqlmap, dirsearch, jwt_tool...)
+.\scripts\misc\install_tools.ps1 -Android    # Android 工具 (apktool, jadx...)
+.\scripts\misc\install_tools.ps1 -Windows    # Windows 工具 (Cutter, PE-bear, DiE...)
+.\scripts\misc\install_tools.ps1 -GoTools    # Go 工具 (ffuf, nuclei, httpx...)
+.\scripts\misc\install_tools.ps1 -Common     # 通用工具 (Ghidra, Maven)
+```
+
+每个工具目录下也有独立的 `README.md`，包含手动下载链接和安装说明。
 
 ## 前置依赖
 
