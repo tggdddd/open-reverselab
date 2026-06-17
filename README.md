@@ -11,16 +11,59 @@
 ## 快速开始
 
 ```powershell
-# 1. 装工具（按需选一个）
-.\scripts\misc\install_tools.ps1 -CTF         # 只装 Web CTF 工具
-.\scripts\misc\install_tools.ps1 -All         # 全部安装
+git clone https://github.com/LING71671/open-reverselab.git
+cd open-reverselab
+```
 
-# 2. 检查安装状态
-python scripts/misc/ai_toolcheck.py
+## 使用方法
 
-# 3. 查知识库（按信号搜索攻击技术）
+### 场景一：Web CTF
+
+```powershell
+# 1. 装工具
+.\scripts\misc\install_tools.ps1 -CTF
+
+# 2. 建题目 case
+.\scripts\ctf-website\ctf_new_challenge.ps1 -Name mychall -Url https://target.com
+
+# 3. 按信号搜攻击技术
 python scripts/ctf-website/kb_router.py "jwt"
 python scripts/ctf-website/kb_router.py "sql injection"
+
+# 4. 读技术文件，复制伪代码，改 URL，跑
+#    技术文件在 kb/ctf-website/techniques/
+
+# 5. 输出放 cases/mychall/ → exports/ → reports/
+```
+
+### 场景二：二进制分析 (PE/APK)
+
+```powershell
+# 1. 装工具
+.\scripts\misc\install_tools.ps1 -Windows    # PE 分析
+.\scripts\misc\install_tools.ps1 -Android    # APK 分析
+
+# 2. 样本放 samples/<board>/
+# 3. triage → 静态分析 → 动态分析 → 报告
+#    模板: templates/notes/sample-analysis.md
+#    Ghidra MCP: 启动后 AI 可自动分析
+```
+
+### 场景三：AI Agent 模式
+
+```powershell
+# 1. 配置 codex-session-patcher（一次性）
+#    https://github.com/ryfineZ/codex-session-patcher
+
+# 2. 安装推荐 skills
+#    见 SKILLS.md
+
+# 3. 启动 Claude Code 或 Codex
+#    AI 自动读取 CLAUDE.md → AGENTS.md → AI-USAGE.md
+#    通过 kb_router 查技术，MCP 工具执行分析
+
+# 4. 检查 AI 环境
+python scripts/misc/lab_healthcheck.py
 ```
 
 ## AI Entry
