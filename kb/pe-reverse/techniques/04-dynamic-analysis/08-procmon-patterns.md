@@ -1,0 +1,150 @@
+# Procmon 行为监控与过滤
+
+## 场景
+
+需要对目标进程进行非侵入式行为监控——文件访问、注册表操作、进程/线程创建、网络连接。Procmon 是首选工具。
+
+## 输入信号
+
+- 目标 PE 运行时有文件/注册表/网络活动
+- 需要关联时间线，确定初始化顺序
+- 需要过滤噪音（系统进程、已知安全软件）
+
+## Procmon 过滤规则生成
+
+```
+Procmon 默认捕获全系统事件 → 噪音巨大 → 必须过滤
+
+基本过滤:
+  1. Process Name → is → target.exe → Include
+  2. Operation → is → WriteFile → Include (只看写文件)
+  3. Path → contains → C:\Users → Include (只看用户目录)
+
+组合过滤:
+  1. Process Name → is → target.exe → Include
+  2. Operation → is → RegSetValue → Include
+  3. Path → contains → Run → Include  (只看 Run 键)
+```
+
+## 实战场景过滤集
+
+### 场景 1: 追踪文件落盘
+
+```
+Include: Process Name is target.exe
+Include: Operation is WriteFile
+Include: Operation is CreateFile (仅 CreateDisposition=CREATE_ALWAYS)
+Exclude: Path contains C:\Windows    (排除系统目录写入)
+Exclude: Path contains .log         (排除日志)
+Include: Path contains C:\Users     (只看用户目录)
+Include: Path contains AppData
+```
+
+### 场景 2: 追踪注册表持久化
+
+```
+Include: Process Name is target.exe
+Include: Operation is RegSetValue
+Include: Path contains Run          (Run/RunOnce)
+Include: Path contains Winlogon
+Include: Path contains Services
+Include: Path contains Image File Execution Options
+```
+
+### 场景 3: 追踪进程注入
+
+```
+Include: Process Name is target.exe
+Include: Operation is ProcessCreate
+Include: Operation is LoadImage     (DLL 加载)
+Include: Operation is CreateRemoteThread
+Include: Operation is VirtualAllocEx
+Include: Detail contains target     (过滤相关进程)
+```
+
+### 场景 4: 追踪网络连接
+
+```
+Include: Operation is TCP Connect
+Include: Operation is TCP Receive
+Include: Operation is TCP Send
+Include: Operation is UDP Send
+Include: Operation is UDP Receive
+Include: Path contains <target IP>  (如已知道 IP)
+```
+
+## 时间线分析
+
+```
+Procmon 输出示例:
+Time        Operation    Path                    Detail
+12:00:01    CreateFile   C:\data\config.dat      SUCCESS
+12:00:03    RegOpenKey   HKLM\Software\App       SUCCESS
+12:00:03    RegQueryValue                         "Version"="1.0"
+12:00:05    TCP Connect  192.168.1.1:443          SUCCESS
+12:00:10    WriteFile    C:\data\output.bin       Offset:0 Len:4096
+12:00:15    ProcessCreate C:\Windows\temp\helper.exe
+
+分析:
+1. 首先读配置文件
+2. 读注册表配置
+3. 建立网络连接 (C2?)
+4. 写数据文件 (exfil?)
+5. 创建子进程 (dropper?)
+```
+
+## 导出与分析
+
+```
+Procmon → File → Save → CSV → 用 Python 分析
+
+import pandas as pd
+df = pd.read_csv('Logfile.CSV')
+
+# 按操作类型统计
+ops = df['Operation'].value_counts()
+# RegOpenKey     234
+# ReadFile       128
+# WriteFile       15
+# TCP Connect      2
+
+# 唯一文件路径
+paths = df[df['Operation']=='WriteFile']['Path'].unique()
+# C:\Users\victim\AppData\Local\Temp\tmp1234.dat
+# C:\Users\victim\AppData\Roaming\malware\config.enc
+
+# 唯一网络目标
+ips = df[df['Operation']=='TCP Connect']['Path'].unique()
+# 45.67.89.123:443
+```
+
+## 过滤规则生成器
+
+```cpp
+// 根据目标的导入表生成 Procmon 过滤规则
+struct ProcmonFilter {
+    std::vector<std::string> includeOperations;
+    std::vector<std::string> includePaths;
+    std::vector<std::string> excludePaths;
+};
+
+ProcmonFilter GenerateFromImports(const char* targetPath) {
+    ProcmonFilter filter;
+    // 1. 用 PE parser 提取导入 API
+    // 2. 按 API 类别生成规则:
+    //    WriteFile → Include Operation: WriteFile, CreateFile
+    //    RegSetValue → Include Operation: RegSetValue, RegCreateKey
+    //    socket/connect → Include Operation: TCP/UDP Connect
+    //    CreateProcess → Include Operation: ProcessCreate
+    return filter;
+}
+```
+
+## 攻击链
+
+```
+启动 Procmon BTN 开始捕获 → 运行目标 PE → 目标行为完成 → 停止捕获
+→ 设置过滤: Process Name → Apply → 按 Operation 分类
+→ 时间线分析: 操作类型/路径/结果 → 提取关键文件/注册表/网络 IOC
+→ Export CSV → Python 聚合统计 → 理解完整行为链
+```
