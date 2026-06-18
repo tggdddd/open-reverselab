@@ -405,10 +405,56 @@
     {
       "id": "attack-network",
       "signals": ["attack network", "attack graph", "attack chain", "attack path", "entry point", "多入口", "攻击路径", "分叉", "全网图"],
-      "files": [
-        "attack-network.md"
-      ],
+      "files": ["attack-network.md"],
       "priority": 10
+    },
+    {
+      "id": "idor",
+      "signals": ["idor", "insecure direct object reference", "越权", "authorization bypass", "object reference", "uuid predictable", "batch idor", "graphql idor", "enumeration", "id increment", "horizontal privilege", "vertical privilege", "CWE-639"],
+      "files": ["14-idor/01-idor-enumeration.md", "14-idor/02-bac-business-logic.md"],
+      "priority": 10
+    },
+    {
+      "id": "mass-assignment",
+      "signals": ["mass assignment", "批量赋值", "属性注入", "parameter injection", "laravel fillable", "spring boot binding", "nesting params", "price manipulation", "价格篡改", "coupon stacking", "优惠券叠加", "currency confusion", "race condition coupon", "CWE-915"],
+      "files": ["15-mass-assignment/01-mass-assignment.md", "15-mass-assignment/02-parameter-tampering.md"],
+      "priority": 10
+    },
+    {
+      "id": "rate-limit",
+      "signals": ["rate limit", "速率限制", "brute force", "暴力破解", "credential spraying", "凭证喷洒", "mfa fatigue", "push bombing", "ip rotation", "x-forwarded-for", "throttle bypass", "password spray", "concurrent bypass"],
+      "files": ["16-rate-limit/01-rate-limit-bypass.md", "16-rate-limit/02-brute-force-tactics.md"],
+      "priority": 10
+    },
+    {
+      "id": "api-attacks",
+      "signals": ["api", "swagger", "openapi", "graphql introspection", "wsdl", "soap", "postman collection", "api key leak", "github dorking", "firebase config", "aws key", "gcp key", "stripe key", "source map", "unwebpack"],
+      "files": ["17-api-attacks/01-api-discovery-leak.md", "17-api-attacks/02-api-key-leak.md"],
+      "priority": 10
+    },
+    {
+      "id": "csp-cors-advanced",
+      "signals": ["csp bypass", "content security policy", "csp evaluator", "jsonp", "cdn gadget", "dom clobber", "strict-dynamic bypass", "xs-leaks", "cross-site leak", "side channel", "frame counting", "xs-search", "xs-leak", "performance api"],
+      "files": ["18-cors-csp-advanced/01-csp-bypass.md", "18-cors-csp-advanced/02-xs-leaks-browser-sidechannels.md"],
+      "priority": 9
+    },
+    {
+      "id": "dns-email",
+      "signals": ["subdomain takeover", "子域名接管", "dangling dns", "cname takeover", "cloudfront takeover", "email spoofing", "spf", "dkim", "dmarc", "smtp injection", "phishing", "microsoft 365", "spf bypass", "sender forgery"],
+      "files": ["19-dns-email/01-subdomain-takeover.md", "19-dns-email/02-email-spoofing.md"],
+      "priority": 9
+    },
+    {
+      "id": "oauth-deep",
+      "signals": ["oauth attack", "pkce bypass", "redirect_uri bypass", "state replay", "scope escalation", "implicit flow", "session fixation", "sso hijack", "remember-me", "refresh token abuse", "sameSite bypass", "session puzzling"],
+      "files": ["20-oauth-deep/01-oauth-attack-chains.md", "20-oauth-deep/02-session-fixation-attacks.md"],
+      "priority": 10
+    },
+    {
+      "id": "mobile-bridge",
+      "signals": ["webview", "addjavascriptinterface", "deeplink", "intent hijacking", "cordova", "react native", "electron", "nodeintegration", "contextisolation", "flutter", "platform channel", "capacitor", "wkwebview", "javascript bridge"],
+      "files": ["21-mobile-bridge/01-webview-attacks.md", "21-mobile-bridge/02-cordova-reactnative.md"],
+      "priority": 9
     }
   ]
 }
