@@ -1,6 +1,11 @@
 # ReverseLab
 
+License: **GPL-3.0-only**. See [LICENSE](LICENSE).
+
 开源逆向工程实验环境 —— 面向 Android / Windows / Web CTF 的二进制分析与漏洞研究框架。目录即约定，AI 友好。
+
+> 公共仓库只包含通用框架、模板和合成测试数据。私人样本、case、日志、目标信息、
+> 凭据和个人信息不属于迁移范围，详见 [PUBLICATION.md](PUBLICATION.md)。
 
 ## 谁适合用
 
@@ -202,3 +207,6 @@ python scripts/misc/ai_toolcheck.py
 - `scripts/` — 完善工具脚本
 - `templates/` — 优化分析模板
 - `tools/` — 补充工具安装说明
+
+提交前请运行 `python scripts/misc/public_release_check.py`，并遵守
+[SECURITY.md](SECURITY.md) 与 [CONTRIBUTING.md](CONTRIBUTING.md)。
