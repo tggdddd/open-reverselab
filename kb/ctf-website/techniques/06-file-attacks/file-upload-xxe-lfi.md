@@ -405,5 +405,5 @@ AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击步骤：
 
 | 攻击步骤 | MCP 工具 | 说明 |
 |---------|---------|------|
-| 文件上传/LFI 探测 | `http_probe` | 探测上传端点/路径遍历 |
-| 按信号查技术 | `kb_router` | 搜索 file upload / xxe / lfi 相关技术文件 |
+| 文件上传/XXE/LFI 端点探测 | `http_probe` | HTTP GET 探测文件操作入口点 |
+| 知识检索 | `kb_router` | 按文件攻击信号搜索知识库 |

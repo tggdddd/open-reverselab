@@ -111,5 +111,5 @@ AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击步骤：
 
 | 攻击步骤 | MCP 工具 | 说明 |
 |---------|---------|------|
-| Open Redirect 探测 | `http_probe` | 测试 redirect 参数 |
-| 按信号查技术 | `kb_router` | 搜索 open redirect 相关技术文件 |
+| 开放重定向探测 | `http_probe` | HTTP GET 探测开放重定向入口点 |
+| 知识检索 | `kb_router` | 按开放重定向信号搜索知识库 |

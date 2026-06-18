@@ -293,6 +293,6 @@ AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击步骤：
 
 | 攻击步骤 | MCP 工具 | 说明 |
 |---------|---------|------|
-| 反序列化探测 | `http_probe` | 发送序列化 payload |
-| 按信号查技术 | `kb_router` | 搜索 deserialization 相关技术文件 |
+| 反序列化端点探测 | `http_probe` | HTTP GET 探测反序列化入口点 |
+| 知识检索 | `kb_router` | 按反序列化攻击信号搜索知识库 |
 

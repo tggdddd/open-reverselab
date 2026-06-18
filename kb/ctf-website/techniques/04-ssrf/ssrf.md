@@ -268,6 +268,7 @@ AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击步骤：
 
 | 攻击步骤 | MCP 工具 | 说明 |
 |---------|---------|------|
-| SSRF 探测 | `http_probe` | 发送 SSRF payload |
-| 按信号查技术 | `kb_router` | 搜索 ssrf 相关技术文件 |
+| SSRF 端点探测 | `http_probe` | HTTP GET 探测 SSRF 入口点 |
+| 知识检索 | `kb_router` | 按 SSRF 攻击信号搜索知识库 |
+| 知识库文件读取 | `kb_read_file` | 读取知识库技术文件内容 |
 
