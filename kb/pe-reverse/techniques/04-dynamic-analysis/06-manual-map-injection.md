@@ -221,3 +221,11 @@ void ExecuteDllMain(ManualMapData* ctx) {
 → 解析导入表, LoadLibrary 依赖 + 填充 IAT
 → Shellcode 调用 DllMain(DLL_PROCESS_ATTACH) → DLL 无痕注入完成
 ```
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击链步骤：
+
+| 攻击链步骤 | MCP 工具 | 说明 |
+|-----------|---------|------|
+| _（纯手工 PE 加载技术，无直接 MCP 等价物）_ | | |

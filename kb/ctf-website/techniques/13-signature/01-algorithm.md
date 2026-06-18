@@ -1897,3 +1897,11 @@ ALGORITHM_EVIDENCE_TEMPLATE = {
     },
 }
 ```
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击步骤：
+
+| 攻击步骤 | MCP 工具 | 说明 |
+|---------|---------|------|
+| 签名算法探测 | `http_probe` | HTTP GET 探测签名算法信息 |
+| 知识检索 | `kb_router` | 按签名算法攻击信号搜索知识库 |

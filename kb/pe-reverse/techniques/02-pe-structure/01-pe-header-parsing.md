@@ -173,3 +173,15 @@ FARPROC GetExportByName(uintptr_t moduleBase, const char* funcName) {
 → FileHeader.NumberOfSections → IMAGE_FIRST_SECTION 遍历节区
 → 按名称/属性定位目标节区 → 在节区内扫描/读写
 ```
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击链步骤：
+
+| 攻击链步骤 | MCP 工具 | 说明 |
+|-----------|---------|------|
+| PE 初筛，输出 header/sections/imports | `triage_pe` | 自动输出 PE header/sections/imports |
+| 节区详细信息 | `rizin_sections` | 节区详细信息 |
+| PE 基础信息 | `rizin_bin_info` | PE 基础信息（entry point, image base 等） |
+| 导入表枚举 | `rizin_imports` | 导入表枚举 |
+| file offset / RVA / VA 互转 | `pe_address_to_offset` | file offset / RVA / VA 互转 |

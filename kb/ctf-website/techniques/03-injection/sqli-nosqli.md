@@ -333,3 +333,13 @@ def session_splice(requests_parts: list[str]):
 ## Evidence
 
 记录: 真假响应对 (布尔盲注)、快慢时间对 (时间盲注)、OOB DNS/HTTP 日志、Second-order 两步 request/response
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击步骤：
+
+| 攻击步骤 | MCP 工具 | 说明 |
+|---------|---------|------|
+| 探测注入点 | `http_probe` | HTTP GET 探测参数 |
+| SQL 注入自动化 | `run_ctf_tool sqlmap --args "--batch --dbs"` | 自动检测+利用 SQLi |
+| 按信号查技术 | `kb_router` | 搜索 sqli 相关技术文件 |

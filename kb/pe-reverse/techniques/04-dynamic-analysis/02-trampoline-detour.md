@@ -191,3 +191,13 @@ Ghidra 定位目标函数 → 确定 detourSize ≥ 5（确保覆盖完整指令
 → VirtualProtect 修改目标入口为 JMP → 验证 hook 生效
 → 退出前 RemoveTrampoline 恢复原始代码
 ```
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击链步骤：
+
+| 攻击链步骤 | MCP 工具 | 说明 |
+|-----------|---------|------|
+| 定位目标函数 | `ghidra_headless_analyze` | 定位目标函数 |
+| 按行为查找候选 Hook 函数 | `ghidra_summary_call_focus` | 按行为查找候选 Hook 函数 |
+| 生成 JMP 跳板机器码 | `rizin_assemble_patch` | 生成 JMP 跳板机器码（注意: JMP 偏移计算需要手动） |

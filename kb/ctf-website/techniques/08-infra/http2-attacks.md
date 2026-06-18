@@ -116,3 +116,12 @@ Stream multiplexing → RST_STREAM 竞争 → request smuggling → 缓存投毒
 ## Evidence
 
 记录: HTTP/2 frame 序列 (hex)、服务端响应 SETTINGS/GOAWAY/RST_STREAM、内存/CPU 监控
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击步骤：
+
+| 攻击步骤 | MCP 工具 | 说明 |
+|---------|---------|------|
+| HTTP/2 攻击探测 | `http_probe` | HTTP GET 探测 HTTP/2 协议差异 |
+| 知识检索 | `kb_router` | 按 HTTP/2 攻击信号搜索知识库 |

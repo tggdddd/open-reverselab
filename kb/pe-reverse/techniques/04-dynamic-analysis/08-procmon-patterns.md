@@ -148,3 +148,14 @@ ProcmonFilter GenerateFromImports(const char* targetPath) {
 → 时间线分析: 操作类型/路径/结果 → 提取关键文件/注册表/网络 IOC
 → Export CSV → Python 聚合统计 → 理解完整行为链
 ```
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击链步骤：
+
+| 攻击链步骤 | MCP 工具 | 说明 |
+|-----------|---------|------|
+| 启动 Procmon 采集 | `procmon_start_capture` | 启动 Procmon 采集 |
+| 停止采集 | `procmon_stop_capture` | 停止采集 |
+| 导出 CSV 分析 | `procmon_export_csv` | 导出 CSV 分析 |
+| 自动生成 Procmon 过滤方案 | `make_procmon_filters` | **根据样本导入表自动生成 Procmon 过滤方案** → `scripts/windows/procmon/` |

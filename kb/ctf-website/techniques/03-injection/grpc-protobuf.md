@@ -123,3 +123,12 @@ gRPC-Web → decode → 修改 payload → re-encode → 绕过前端验证
 ## Evidence
 
 记录: gRPC 服务/方法枚举结果、Protobuf 消息修改前后 hex diff、注入字段的 field number 和值、服务端响应差异
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击步骤：
+
+| 攻击步骤 | MCP 工具 | 说明 |
+|---------|---------|------|
+| gRPC 端点探测 | `http_probe` | HTTP/2 探测 gRPC 服务 |
+| 按信号查技术 | `kb_router` | 搜索 grpc 相关技术文件 |

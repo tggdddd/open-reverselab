@@ -151,3 +151,13 @@ Interceptor.attach(system_ptr, {
 → Frida hook 验证函数入口 dump 参数 → 抓包确认 API 请求格式
 → 选择绕过方式: hook 返回/自建服务器/patch 二进制
 ```
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击链步骤：
+
+| 攻击链步骤 | MCP 工具 | 说明 |
+|-----------|---------|------|
+| Frida Hook 验证函数入口 + 签名校验 | `android_crypto_unpack_recipe` | Frida Hook 验证函数入口 + 签名校验 |
+| 分析 native 验证函数 | `ghidra_headless_analyze` | 分析 native 验证函数 |
+| 观察验证 HTTP 请求 | `android_http_observation_recipe` | 观察验证 HTTP 请求 |

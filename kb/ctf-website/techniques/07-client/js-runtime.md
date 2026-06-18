@@ -315,3 +315,12 @@ resp = requests.post("https://target.com/api/sensitive",
     json=sign_request({"userId": 1}, "captured_secret_from_hook"))
 ```
 
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击步骤：
+
+| 攻击步骤 | MCP 工具 | 说明 |
+|---------|---------|------|
+| JS Runtime 行为探测 | `http_probe` | HTTP GET 探测 JS 运行时行为 |
+| 知识检索 | `kb_router` | 按 JS 运行时攻击信号搜索知识库 |
+

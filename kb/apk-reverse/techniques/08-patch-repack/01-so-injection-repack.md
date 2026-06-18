@@ -144,3 +144,14 @@ void bypass_integrity_check() {
 APK → apktool d 解包 → 放置 inject.so → smali 注入 loadLibrary
 → apktool b 重打包 → 签名 → adb install → 启动验证 JNI_OnLoad 执行 → 目标逻辑运行
 ```
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击链步骤：
+
+| 攻击链步骤 | MCP 工具 | 说明 |
+|-----------|---------|------|
+| 安装原始 APK 收集基线 | `android_app_baseline` | 安装原始 APK 收集基线 |
+| 复制到 patches 目录 | `copy_sample_to_patches` | 复制到 patches 目录 |
+| 修改 smali/so 字节 | `patch_bytes` / `patch_pattern` | 修改 smali/so 字节 |
+| 安装重打包 APK | `android_install_apk` | 安装重打包 APK |

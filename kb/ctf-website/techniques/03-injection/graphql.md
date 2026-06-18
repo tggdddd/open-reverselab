@@ -256,3 +256,12 @@ GraphQL Subscription → WebSocket → 实时监听 flag 变化
 GraphQL GET → CSRF → mutation 执行 → 删号/转账
 GraphQL + sqlmap → 底层 SQLi → 读文件 → RCE
 ```
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击步骤：
+
+| 攻击步骤 | MCP 工具 | 说明 |
+|---------|---------|------|
+| GraphQL 端点探测 | `http_probe` | GET /graphql?query={__schema{types{name}}} |
+| 按信号查技术 | `kb_router` | 搜索 graphql 相关技术文件 |

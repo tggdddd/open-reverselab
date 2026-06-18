@@ -1078,21 +1078,21 @@ def http_probe(url: str, timeout: int = 15) -> dict[str, Any]:
 
 
 @mcp.tool()
-def kb_router(query: str) -> dict[str, Any]:
-    """按攻击信号搜索知识库，返回匹配的技术文件和路径。"""
-    return _safe_call(web_ctf.kb_router, query)
+def kb_router(query: str, board: str = "") -> dict[str, Any]:
+    """按攻击信号搜索知识库（支持所有板块），返回匹配的技术文件和路径。board 可选: ctf-website|apk-reverse|pe-reverse，不传则全部搜索。"""
+    return _safe_call(web_ctf.kb_router, query, board)
 
 
 @mcp.tool()
-def kb_read_file(technique_path: str) -> dict[str, Any]:
-    """读取知识库技术文件内容。路径格式如 '02-auth/jwt/01-alg-none.md'。"""
-    return _safe_call(web_ctf.kb_read_file, technique_path)
+def kb_read_file(technique_path: str, board: str = "") -> dict[str, Any]:
+    """读取知识库技术文件内容。自动检测板块或通过 board 参数指定。路径格式如 '02-auth/jwt/01-alg-none.md'（ctf-website）或 '04-crypto/01-game-encryption-patterns.md'（apk-reverse）或 '01-triage/01-aob-signature-scan.md'（pe-reverse）。"""
+    return _safe_call(web_ctf.kb_read_file, technique_path, board)
 
 
 @mcp.tool()
-def kb_catalog() -> dict[str, Any]:
-    """列出知识库所有分类、条目数和文件数。"""
-    return _safe_call(web_ctf.kb_catalog)
+def kb_catalog(board: str = "") -> dict[str, Any]:
+    """列出知识库所有板块、分类、条目数和文件数。board 可选: ctf-website|apk-reverse|pe-reverse，不传则列出全部板块。"""
+    return _safe_call(web_ctf.kb_catalog, board)
 
 
 @mcp.tool()

@@ -149,3 +149,12 @@ protobuf-inspector → 未知 Protobuf 推断
 → 非 HTTP: tcpdump + 逆向 socket 创建点 → 定位发包函数 → Frida hook
 → 拿明文: 确认序列化格式 (JSON/PB/FlatBuffers) → 解析协议字段
 ```
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击链步骤：
+
+| 攻击链步骤 | MCP 工具 | 说明 |
+|-----------|---------|------|
+| Frida Hook OkHttp/Retrofit + logcat HTTP 证据汇总 | `android_http_observation_recipe` | Frida Hook OkHttp/Retrofit + logcat HTTP 证据汇总 |
+| 如协议层有加密，抓 Cipher key/iv | `android_crypto_unpack_recipe` | 如协议层有加密，抓 Cipher key/iv |

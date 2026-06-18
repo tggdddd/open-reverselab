@@ -135,3 +135,12 @@ file extracted.bin  # 确认是 ELF/.so/.ko
 → file extracted.bin 确认是 ELF/.so/.ko → 静态分析提取的二进制
 → 逆向解密/加载/通信逻辑
 ```
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击链步骤：
+
+| 攻击链步骤 | MCP 工具 | 说明 |
+|-----------|---------|------|
+| 检测自解压 payload 类型 | `die_scan` | 检测自解压 payload 类型 |
+| 从解压 buffer 中 carve PE/DEX | `carve_payloads_from_dump` | 从解压 buffer 中 carve PE/DEX |

@@ -1497,3 +1497,12 @@ graph TD
     DOUBLE --> FLAG
     NEGATIVE --> FLAG
 ```
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击步骤：
+
+| 攻击步骤 | MCP 工具 | 说明 |
+|---------|---------|------|
+| 支付 API 探测 | `http_probe` | HTTP GET 探测支付接口端点 |
+| 知识检索 | `kb_router` | 按支付绕过信号搜索知识库 |

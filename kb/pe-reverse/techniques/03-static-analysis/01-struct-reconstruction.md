@@ -177,3 +177,12 @@ Ghidra 观察 *(this+0xXX) 模式 → 记录所有偏移和访问类型
 → 观察数组遍历步长 → 确认 sizeof → 补齐结构体定义
 → 用 READ/WRITE 测试验证字段功能正确
 ```
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击链步骤：
+
+| 攻击链步骤 | MCP 工具 | 说明 |
+|-----------|---------|------|
+| Ghidra 自动分析生成 decompiled code | `ghidra_headless_analyze` | Ghidra 自动分析生成 decompiled code |
+| 读单个函数 callers/callees/decompile | `ghidra_summary_function_detail` | 读单个函数的 callers/callees/decompile 证据，观察 `*(this+0xXX)` 模式 |

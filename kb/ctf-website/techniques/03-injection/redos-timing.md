@@ -161,3 +161,12 @@ Timing attack → API key → cloud 资源访问 → 数据泄露
 ## Evidence
 
 记录: 每字节采样时间分布 (均值/标准差/样本数)、ReDoS 触发时的事件循环阻塞时间、WAF 绕过证明
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击步骤：
+
+| 攻击步骤 | MCP 工具 | 说明 |
+|---------|---------|------|
+| ReDoS 探测 | `http_probe` | 发送正则炸弹 payload |
+| 按信号查技术 | `kb_router` | 搜索 redos 相关技术文件 |

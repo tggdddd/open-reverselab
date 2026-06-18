@@ -182,3 +182,13 @@ strings / Ghidra Defined Strings → 正则提取 IP/域名/URL/路径/注册表
 → 分类: network / file / registry / mutex / UA
 → 导出 MISP/JSON → 用于 YARA 规则 / Sigma 规则 / TI 平台
 ```
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击链步骤：
+
+| 攻击链步骤 | MCP 工具 | 说明 |
+|-----------|---------|------|
+| 从 Ghidra summary/triage/笔记自动提取 IOC | `extract_iocs_from_summary` | 从 Ghidra summary/triage/笔记自动提取 IOC → `exports/windows/iocs/` |
+| IOC 分层 | `refine_ioc_sources` | IOC 按 static_confirmed/mixed/note_only 分层 |
+| 提取 Defined Strings | `ghidra_summary_strings` | 提取 Defined Strings（URL/IP/注册表路径/mutex） |

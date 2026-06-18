@@ -104,3 +104,13 @@ base64url(Header).base64url(Payload).base64url(Signature)
 - Header + Payload 是 Base64URL **编码**，不是加密，任何人可解码
 - Bearer Token：谁持有谁能用，不验证持有者身份
 - 无状态设计：服务端不存 Token 状态，无法主动撤销
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击步骤：
+
+| 攻击步骤 | MCP 工具 | 说明 |
+|---------|---------|------|
+| JWT 分析/攻击 | `run_ctf_tool jwt_tool` | 运行 jwt_tool 进行 JWT 签名/载荷分析 |
+| Token 验证 | `http_probe` | HTTP GET 探测验证 JWT token 效果 |
+| 知识检索 | `kb_router` | 按 JWT 攻击信号搜索知识库 |

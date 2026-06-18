@@ -256,3 +256,12 @@ curl -H "Origin: https://evil.com" https://target.com/api/me -I | grep -i access
 # 用 jwt_tool 修改 exp
 python3 jwt_tool.py <token> -I -pc "exp" -pv "$(date -d '+30 days' +%s)"
 ```
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击步骤：
+
+| 攻击步骤 | MCP 工具 | 说明 |
+|---------|---------|------|
+| Token 凭证泄露检测 | `http_probe` | HTTP GET 探测 token 泄露端点 |
+| 知识检索 | `kb_router` | 按 token 泄露信号搜索知识库 |

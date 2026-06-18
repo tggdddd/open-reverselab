@@ -104,3 +104,12 @@ python scripts/ctf-website/http_probe.py
 # 安装第三方 (katana, waybackurls 等)
 powershell scripts/ctf-website/install_missing_tools.ps1
 ```
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击步骤：
+
+| 攻击步骤 | MCP 工具 | 说明 |
+|---------|---------|------|
+| Open Redirect 探测 | `http_probe` | 测试 redirect 参数 |
+| 按信号查技术 | `kb_router` | 搜索 open redirect 相关技术文件 |

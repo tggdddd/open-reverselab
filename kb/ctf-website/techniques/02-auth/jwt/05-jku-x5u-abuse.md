@@ -244,3 +244,12 @@ python3 -m http.server 8888
 # 观察是否有请求过来
 python3 -m http.server 8888 2>&1 | tee access.log
 ```
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击步骤：
+
+| 攻击步骤 | MCP 工具 | 说明 |
+|---------|---------|------|
+| JKU/x5u 滥用攻击 | `run_ctf_tool jwt_tool` | 使用 jwt_tool 修改 JWT jku/x5u 头 |
+| 自定义 JWK 端点验证 | `http_probe` | HTTP GET 探测自定义 JWK 端点可达性 |

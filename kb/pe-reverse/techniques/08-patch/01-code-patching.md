@@ -182,3 +182,15 @@ Ghidra/x64dbg 定位目标指令 → 确定 patch 策略(NOP/JMP/立即数)
 → VirtualProtect 恢复原保护 → 验证 patch 生效
 → 退出时 Uninstall 恢复
 ```
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击链步骤：
+
+| 攻击链步骤 | MCP 工具 | 说明 |
+|-----------|---------|------|
+| RVA/VA → file offset 转换 | `pe_address_to_offset` | RVA/VA → file offset 转换 |
+| 按 RVA/VA/file offset 打补丁 | `patch_pe_bytes` | 按 RVA/VA/file offset 打补丁（自动复制到 patches 目录） |
+| 按 file offset 直接 patch | `patch_bytes` | 按 file offset 直接 patch |
+| 写汇编→自动汇编为机器码→patch | `rizin_assemble_patch` | 写汇编 → 自动汇编为机器码 → patch 副本 |
+| 一键全流程逆向自动化 | `sample_full_workup` | **一键全流程**：triage → Ghidra → 断点计划 → IOC → YARA/Sigma，patch 后进行自动化验证 |

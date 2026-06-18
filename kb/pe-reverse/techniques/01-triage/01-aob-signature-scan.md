@@ -152,3 +152,14 @@ def bytes_to_code_pattern(data):
 Ghidra 定位目标指令 → 复制字节序列 → 排除 rel32/imm32（用 ?? 代替）
 → 选择 8-16 字节唯一定位 → 编写 FindPattern → 运行时扫描 → 验证命中唯一
 ```
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击链步骤：
+
+| 攻击链步骤 | MCP 工具 | 说明 |
+|-----------|---------|------|
+| Ghidra 定位目标指令 | `triage_pe` | 一键 hash/DiE/rz-bin info/sections/imports/strings 初筛 |
+| Ghidra 分析提取特征码 | `ghidra_headless_analyze` | Ghidra 导入+自动分析，定位目标指令提取特征码 |
+| 按行为推荐函数阅读优先级 | `ghidra_summary_call_focus` | 按行为推荐函数阅读优先级 |
+| 搜索特定函数获取地址 | `ghidra_summary_functions` | 搜索特定函数，获取地址用于特征码提取 |

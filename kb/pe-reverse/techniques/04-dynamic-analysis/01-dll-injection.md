@@ -166,3 +166,11 @@ uintptr_t GetModuleBaseExternal(DWORD pid, const char* moduleName) {
 → CreateRemoteThread(LoadLibraryA) 加载 DLL → DllMain 执行
 → MainThread: 等待时机 → Hook/读写/UI → FreeLibraryAndExitThread 自弹出
 ```
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击链步骤：
+
+| 攻击链步骤 | MCP 工具 | 说明 |
+|-----------|---------|------|
+| 动态调试验证注入 | `toolbox_launch(x64dbg)` | 动态调试验证注入是否成功 |

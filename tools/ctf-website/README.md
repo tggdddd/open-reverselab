@@ -25,6 +25,11 @@ Web 安全测试 / CTF 工具集。
 | httpx | `go install github.com/projectdiscovery/httpx/cmd/httpx@latest` |
 | nuclei | `go install github.com/projectdiscovery/nuclei/v3/cmd/nuclei@latest` |
 | katana | `go install github.com/projectdiscovery/katana/cmd/katana@latest` |
+
+## 其他工具（Rust 生态）
+
+| 工具 | 安装命令 |
+|---|---|
 | feroxbuster | `cargo install feroxbuster` 或下载预编译版 |
 
 ## 辅助目录

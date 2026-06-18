@@ -156,3 +156,13 @@ x64dbg 加载 PE → 导入表分析 → 在关键 API 设条件断点
 → F9 运行 → 观察参数/返回值 → 日志断点记录行为
 → 定位关键调用点 → 修改寄存器/内存 → 验证效果 → 记录地址做 Patch
 ```
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击链步骤：
+
+| 攻击链步骤 | MCP 工具 | 说明 |
+|-----------|---------|------|
+| 自动生成 x64dbg 断点脚本 | `make_x64dbg_breakpoint_script` | **根据 triage/Ghidra summary 自动生成 x64dbg 断点脚本** → `scripts/windows/debug/` |
+| 启动 x64dbg 加载目标 | `toolbox_launch(x64dbg)` | 启动 x64dbg 并加载目标文件 |
+| 推荐断点位置 | `ghidra_summary_call_focus` | 推荐断点位置（按行为过滤） |

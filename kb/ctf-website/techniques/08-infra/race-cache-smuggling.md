@@ -271,3 +271,12 @@ H2.CL Smuggling → HTTP/2 降级 → 注入请求 → 内网 SSRF
 ## Evidence
 
 记录: 并发数和结果分布、cache header (X-Cache, Age, Cache-Control)、原始 HTTP bytes (CRLF 位置)、smuggling probe 的两种解析结果、竞态成功次数 / 总次数
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击步骤：
+
+| 攻击步骤 | MCP 工具 | 说明 |
+|---------|---------|------|
+| 条件竞争/缓存走私探测 | `http_probe` | HTTP GET 探测条件竞争和缓存差异 |
+| 知识检索 | `kb_router` | 按条件竞争/缓存走私信号搜索知识库 |

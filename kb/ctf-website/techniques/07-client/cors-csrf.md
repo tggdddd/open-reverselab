@@ -160,4 +160,13 @@ CORS → CSRF token 读取 → 完整 CSRF 攻击链路
 ```bash
 # 通用 HTTP 探测框架；带认证的请求应保存在被 gitignore 的 case/exports 中
 python scripts/ctf-website/http_probe.py https://example.test/
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击步骤：
+
+| 攻击步骤 | MCP 工具 | 说明 |
+|---------|---------|------|
+| CORS/CSRF 探测 | `http_probe` | HTTP GET 探测 CORS 头和 CSRF 漏洞 |
+| 知识检索 | `kb_router` | 按 CORS/CSRF 信号搜索知识库 |
 ```

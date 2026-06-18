@@ -3164,3 +3164,12 @@ if __name__ == "__main__":
 - [05-length-extension.md](05-length-extension.md) — 长度扩展攻击 (需要密钥)
 - [12-payment/payment-callback-async.md](../12-payment/payment-callback-async.md) — 回调签名密钥
 - [02-auth/jwt/](../02-auth/jwt/) — JWT 密钥攻击
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击步骤：
+
+| 攻击步骤 | MCP 工具 | 说明 |
+|---------|---------|------|
+| 密钥攻击探测 | `http_probe` | HTTP GET 探测密钥管理弱点 |
+| 知识检索 | `kb_router` | 按密钥攻击信号搜索知识库 |

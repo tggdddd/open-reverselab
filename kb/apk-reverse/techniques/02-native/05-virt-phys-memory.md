@@ -142,3 +142,11 @@ cat /proc/config.gz | gunzip | grep CONFIG_PROC_PAGE_MONITOR
 → read 64bit PTE → 检查 bit63 (page present) → 提取 PFN
 → PFN * PAGE_SIZE + page_offset = 物理地址 → /dev/mem 或驱动直接读写
 ```
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击链步骤：
+
+| 攻击链步骤 | MCP 工具 | 说明 |
+|-----------|---------|------|
+| Frida 脚本辅助定位 | `android_frida_run_script` | 运行 Frida 脚本辅助定位 |

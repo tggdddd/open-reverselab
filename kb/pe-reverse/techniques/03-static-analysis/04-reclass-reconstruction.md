@@ -144,3 +144,12 @@ Cheat Engine 找到基地址 → ReClass 新建 class → 输入基地址
 → 游戏内操作触发变化 → 确认字段语义 (血量/坐标/速度/Id)
 → 导出 C++ struct → Ghidra 中配合分析 → 完成结构体重建
 ```
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击链步骤：
+
+| 攻击链步骤 | MCP 工具 | 说明 |
+|-----------|---------|------|
+| 查找目标函数地址 | `ghidra_summary_functions` | 查找目标函数地址 |
+| 获取函数签名和参数类型 | `ghidra_summary_function_detail` | 获取函数签名和参数类型信息 |

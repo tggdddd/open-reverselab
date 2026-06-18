@@ -265,3 +265,12 @@ python3 jwt_tool.py <original> -X n -I -pc "role" -pv "admin"
 - [PortSwigger: JWT Attacks](https://portswigger.net/web-security/jwt)
 - [jwt_tool Wiki](https://github.com/ticarpi/jwt_tool/wiki)
 - [IANA JWT Claims Registry](https://www.iana.org/assignments/jwt/jwt.xhtml)
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击步骤：
+
+| 攻击步骤 | MCP 工具 | 说明 |
+|---------|---------|------|
+| 防御措施验证 | `http_probe` | HTTP GET 探测验证 JWT 防御配置 |
+| jwt_tool 工具检查 | `ctf_tool_status` | 检查 CTF 工具安装状态 |

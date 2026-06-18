@@ -38,7 +38,7 @@ ReverseLab 工具安装脚本
 选项:
   -All        安装全部工具
   -Android    安装 Android 工具 (apktool, jadx, uber-apk-signer)
-  -Windows    安装 Windows 工具 (Cutter, PE-bear, DiE, HxD, Procmon)
+  -Windows    安装 Windows 工具 (Cutter, PE-bear, DiE, HxD, Procmon, ProcDump, Frida; x64dbg/Scylla 需手动下载)
   -CTF        安装 Web CTF 工具 (sqlmap, dirsearch, nmap, jwt_tool 等)
   -Common     安装通用工具 (Ghidra, Maven)
   -GoTools    安装 Go 生态工具 (ffuf, gobuster, httpx, nuclei, katana)
@@ -261,6 +261,54 @@ function Install-Procmon {
     Write-Host "  Procmon done." -ForegroundColor Green
 }
 
+function Install-ProcDump {
+    Write-Host "`n[Windows] ProcDump" -ForegroundColor Cyan
+    $dir = Join-Path $toolsDir "windows\procdump"
+    New-Item -ItemType Directory -Force -Path $dir | Out-Null
+
+    $url = "https://download.sysinternals.com/files/Procdump.zip"
+    $zip = Join-Path $downloadsDir "procdump.zip"
+    Invoke-Download -Url $url -Output $zip
+    Write-Host "  Extracting ProcDump..." -ForegroundColor Gray
+    Expand-Archive -Path $zip -DestinationPath $dir -Force
+
+    New-ToolBat -Name "procdump" -Target (Join-Path $dir "procdump.exe")
+    Write-Host "  ProcDump done." -ForegroundColor Green
+}
+
+function Install-X64dbg {
+    Write-Host "`n[Windows] x64dbg" -ForegroundColor Cyan
+    Write-Host "  x64dbg requires manual installation." -ForegroundColor Yellow
+    Write-Host "  Download from: https://github.com/x64dbg/x64dbg/releases" -ForegroundColor Yellow
+    Write-Host "  Or via chocolatey: choco install x64dbg" -ForegroundColor Yellow
+    Write-Host "  Extract to: tools/windows/x64dbg/" -ForegroundColor Yellow
+}
+
+function Install-Scylla {
+    Write-Host "`n[Windows] Scylla (IAT repair / dump)" -ForegroundColor Cyan
+    Write-Host "  Scylla requires manual installation." -ForegroundColor Yellow
+    Write-Host "  Download from: https://github.com/NtQuery/Scylla/releases" -ForegroundColor Yellow
+    Write-Host "  Extract to: tools/windows/scylla/" -ForegroundColor Yellow
+    Write-Host "  Note: x64dbg plugin ScyllaHide may also be needed." -ForegroundColor Yellow
+}
+
+function Install-FridaDesktop {
+    Write-Host "`n[Windows] Frida Desktop Tools" -ForegroundColor Cyan
+    $frida = Get-Command frida -ErrorAction SilentlyContinue
+    if ($frida) {
+        Write-Host "  frida-tools already installed." -ForegroundColor Yellow
+        frida --version
+        return
+    }
+    Write-Host "  Installing frida-tools via pip..." -ForegroundColor Gray
+    pip install frida-tools 2>&1 | Out-Null
+    if ($LASTEXITCODE -eq 0) {
+        Write-Host "  frida-tools done." -ForegroundColor Green
+    } else {
+        Write-Warning "  frida-tools installation failed. Try: pip install frida-tools"
+    }
+}
+
 # ═══════════════════════════════════════════
 # CTF WEBSITE TOOLS
 # ═══════════════════════════════════════════
@@ -477,7 +525,11 @@ if ($installWindows) {
     Install-PEBear
     Install-DiE
     Install-HxD
+    Install-X64dbg
+    Install-Scylla
     Install-Procmon
+    Install-ProcDump
+    Install-FridaDesktop
 }
 
 if ($installCTF) {

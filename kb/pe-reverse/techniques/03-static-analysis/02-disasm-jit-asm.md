@@ -232,3 +232,12 @@ size_t FindHookBoundary(uintptr_t addr, size_t minBytes) {
 → Xbyak 生成跳板/替换代码 → 计算完整指令边界
 → VirtualAlloc 分配执行内存 → 写入生成代码 → 安装 Hook
 ```
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击链步骤：
+
+| 攻击链步骤 | MCP 工具 | 说明 |
+|-----------|---------|------|
+| 汇编文本→机器码 | `rizin_assemble_bytes` | 汇编文本→机器码（代替手写 `\x` 转义） |
+| 汇编→patch 副本 | `rizin_assemble_patch` | 汇编→patch 副本 |

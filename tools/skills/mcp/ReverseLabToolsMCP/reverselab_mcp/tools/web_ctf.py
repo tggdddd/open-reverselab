@@ -14,6 +14,13 @@ from pathlib import Path
 from ..config import REVERSE_ROOT, SCRIPTS_DIR, TOOLS_DIR
 from ..paths import ensure_under
 
+# ── KB roots for all boards ──
+KB_ROOTS = {
+    "ctf-website": REVERSE_ROOT / "kb" / "ctf-website" / "techniques",
+    "apk-reverse": REVERSE_ROOT / "kb" / "apk-reverse" / "techniques",
+    "pe-reverse": REVERSE_ROOT / "kb" / "pe-reverse" / "techniques",
+}
+
 KB_INDEX = REVERSE_ROOT / "kb" / "ctf-website" / "techniques" / "kb-index.json"
 TECHNIQUES_DIR = REVERSE_ROOT / "kb" / "ctf-website" / "techniques"
 KB_ROUTER = SCRIPTS_DIR / "ctf-website" / "kb_router.py"
@@ -59,14 +66,16 @@ def http_probe(url: str, timeout: int = 15) -> dict:
         return {"url": url, "error": str(e)}
 
 
-# ── KB Router ──
+# ── KB Router (all boards) ──
 
-def kb_router(query: str) -> dict:
-    """Search the knowledge base for techniques matching a signal."""
-    if not KB_INDEX.exists():
-        return {"error": f"kb-index.json not found at {KB_INDEX}"}
+def _search_kb(query: str, board: str) -> list[dict]:
+    """Search a single KB board's index and return scored results."""
+    techniques_dir = KB_ROOTS[board]
+    index_path = techniques_dir / "kb-index.json"
+    if not index_path.exists():
+        return []
 
-    with open(KB_INDEX, encoding="utf-8") as f:
+    with open(index_path, encoding="utf-8") as f:
         data = json.load(f)
 
     entries = data.get("entries", [])
@@ -85,23 +94,86 @@ def kb_router(query: str) -> dict:
                 score += 3
         if score > 0:
             results.append({
+                "board": board,
                 "id": entry["id"],
                 "priority": entry.get("priority", 0),
                 "score": score,
                 "signals": entry.get("signals", [])[:8],
                 "files": [
-                    str(TECHNIQUES_DIR / f) for f in entry.get("files", [])
+                    str(techniques_dir / f) for f in entry.get("files", [])
                 ],
             })
 
     results.sort(key=lambda r: r["score"], reverse=True)
-    return {"query": query, "results": results[:10], "total": len(results)}
+    return results
 
 
-def kb_read_file(technique_path: str) -> dict:
-    """Read a technique file from kb/ctf-website/techniques/."""
-    resolved = (TECHNIQUES_DIR / technique_path).resolve()
-    ensure_under(resolved, [TECHNIQUES_DIR], "technique path")
+def kb_router(query: str, board: str = "") -> dict:
+    """按攻击信号搜索知识库（支持所有板块），返回匹配的技术文件和路径。
+
+    board 参数可选：'ctf-website' | 'apk-reverse' | 'pe-reverse' | ''（全部搜索）
+    """
+    boards = [board] if board else list(KB_ROOTS.keys())
+    all_results = []
+    for b in boards:
+        if b in KB_ROOTS:
+            all_results.extend(_search_kb(query, b))
+
+    # Sort across boards by score
+    all_results.sort(key=lambda r: r["score"], reverse=True)
+
+    # Group by board for clarity
+    by_board = {}
+    for r in all_results[:15]:
+        by_board.setdefault(r["board"], []).append(r)
+
+    return {
+        "query": query,
+        "boards_searched": boards,
+        "total": len(all_results),
+        "by_board": by_board,
+        "top": all_results[:10],
+    }
+
+
+def kb_read_file(technique_path: str, board: str = "") -> dict:
+    """读取知识库技术文件内容。自动检测板块或通过 board 参数指定。
+
+    路径格式如 '02-auth/jwt/01-alg-none.md'（ctf-website）
+    或 '04-crypto/01-game-encryption-patterns.md'（apk-reverse）
+    或 '01-triage/01-aob-signature-scan.md'（pe-reverse）
+    """
+    # Auto-detect board from path if not specified
+    if not board:
+        # Try to find which KB has this file
+        for b, root in KB_ROOTS.items():
+            candidate = (root / technique_path).resolve()
+            try:
+                ensure_under(candidate, [root], "technique path")
+                if candidate.exists() and candidate.is_file():
+                    board = b
+                    break
+            except ValueError:
+                continue
+        else:
+            # Fallback: search all roots for existence
+            for b, root in KB_ROOTS.items():
+                candidate = root / technique_path
+                if candidate.exists() and candidate.is_file():
+                    board = b
+                    break
+
+    if not board or board not in KB_ROOTS:
+        return {
+            "error": f"Cannot resolve board for '{technique_path}'. "
+            f"Specify board: {', '.join(KB_ROOTS.keys())}"
+        }
+
+    resolved = (KB_ROOTS[board] / technique_path).resolve()
+    try:
+        ensure_under(resolved, [KB_ROOTS[board]], "technique path")
+    except ValueError as e:
+        return {"error": str(e)}
 
     if not resolved.exists():
         return {"error": f"file not found: {resolved}"}
@@ -110,6 +182,7 @@ def kb_read_file(technique_path: str) -> dict:
 
     content = resolved.read_text(encoding="utf-8", errors="replace")
     return {
+        "board": board,
         "path": str(resolved.relative_to(REVERSE_ROOT)),
         "size": len(content),
         "lines": content.count("\n"),
@@ -118,7 +191,51 @@ def kb_read_file(technique_path: str) -> dict:
     }
 
 
-# ── Case management ──
+def kb_catalog(board: str = "") -> dict:
+    """列出知识库所有板块、分类、条目数和文件数。
+
+    board 参数可选：不传则列出所有板块。
+    """
+    boards = [board] if board else list(KB_ROOTS.keys())
+    all_catalogs = {}
+
+    for b in boards:
+        if b not in KB_ROOTS:
+            continue
+        index_path = KB_ROOTS[b] / "kb-index.json"
+        if not index_path.exists():
+            all_catalogs[b] = {"error": "kb-index.json not found"}
+            continue
+
+        with open(index_path, encoding="utf-8") as f:
+            data = json.load(f)
+
+        entries = data.get("entries", [])
+        categories = {}
+        for entry in entries:
+            for f_path in entry.get("files", []):
+                cat = f_path.split("/")[0]
+                categories.setdefault(cat, {"files": set(), "entry_ids": []})
+                categories[cat]["files"].add(f_path)
+                if entry["id"] not in categories[cat]["entry_ids"]:
+                    categories[cat]["entry_ids"].append(entry["id"])
+
+        all_catalogs[b] = {
+            "version": data.get("version", ""),
+            "techniques_dir": str(KB_ROOTS[b].relative_to(REVERSE_ROOT)),
+            "total_entries": len(entries),
+            "total_files": sum(len(e.get("files", [])) for e in entries),
+            "categories": {
+                cat: {
+                    "entry_count": len(info["entry_ids"]),
+                    "file_count": len(info["files"]),
+                    "entries": info["entry_ids"],
+                }
+                for cat, info in sorted(categories.items())
+            },
+        }
+
+    return {"boards": all_catalogs}
 
 def ctf_new_challenge(name: str, url: str = "") -> dict:
     """Create a new CTF challenge case directory."""
@@ -212,37 +329,3 @@ def ctf_tool_status() -> dict:
             "installed": path.exists(),
         }
     return {"tools": status, "install_cmd": ".\\scripts\\misc\\install_tools.ps1 -CTF"}
-
-
-# ── KB Index Info ──
-
-def kb_catalog() -> dict:
-    """List all categories and entry counts in the knowledge base."""
-    if not KB_INDEX.exists():
-        return {"error": f"kb-index.json not found"}
-
-    with open(KB_INDEX, encoding="utf-8") as f:
-        data = json.load(f)
-
-    entries = data.get("entries", [])
-    categories = {}
-    for entry in entries:
-        for f in entry.get("files", []):
-            cat = f.split("/")[0]
-            categories.setdefault(cat, {"files": set(), "entry_ids": []})
-            categories[cat]["files"].add(f)
-            if entry["id"] not in categories[cat]["entry_ids"]:
-                categories[cat]["entry_ids"].append(entry["id"])
-
-    return {
-        "version": data.get("version", ""),
-        "total_entries": len(entries),
-        "categories": {
-            cat: {
-                "entry_count": len(info["entry_ids"]),
-                "file_count": len(info["files"]),
-                "entries": info["entry_ids"],
-            }
-            for cat, info in sorted(categories.items())
-        },
-    }

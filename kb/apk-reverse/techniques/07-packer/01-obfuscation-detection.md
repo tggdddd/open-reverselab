@@ -88,3 +88,14 @@ var data = Memory.readByteArray(base, size)
 .so 文件 → DiE/diec 检测壳签名 → strings 判断明文率 → Ghidra 打开确认混淆类型
 → 有壳: Frida spawn + dump → 无壳: 反混淆插件处理 → 重新静态分析
 ```
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击链步骤：
+
+| 攻击链步骤 | MCP 工具 | 说明 |
+|-----------|---------|------|
+| DiE/diec 检测壳/混淆签名 | `die_scan` | DiE/diec 检测壳/混淆签名 |
+| Frida spawn + dump 解密后 dex/so | `android_crypto_unpack_recipe` | Frida spawn + dump 解密后 dex/so |
+| 从 dump 中自动 carve DEX payload | `carve_payloads_from_dump` | 从 dump 中自动 carve DEX payload |
+| 分析 dump 出的 clean 文件 | `ghidra_headless_analyze` | 分析 dump 出的 clean 文件 |

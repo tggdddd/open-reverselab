@@ -90,3 +90,12 @@ for (int i = 0; i < count; i++) {
 → 逐级 getZZ 遍历 → 确认数组基址/步长
 → 遍历读取目标字段 → 数据落盘/渲染
 ```
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击链步骤：
+
+| 攻击链步骤 | MCP 工具 | 说明 |
+|-----------|---------|------|
+| Frida 获取模块基址遍历指针链 | `android_frida_run_script` | 运行 Frida 脚本获取模块基址、遍历指针链 |
+| 查找偏移相关函数 | `ghidra_summary_functions` | 查找偏移相关函数 |

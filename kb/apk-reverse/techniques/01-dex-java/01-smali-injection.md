@@ -127,3 +127,16 @@ uber-apk-signer/apksigner → 重签名
 jadx 定位目标类/方法 → apktool d 解包 → 编辑 smali 注入代码
 → apktool b 打包 → apksigner 签名 → adb install → 验证注入代码执行
 ```
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击链步骤：
+
+| 攻击链步骤 | MCP 工具 | 说明 |
+|-----------|---------|------|
+| 安装 APK 并收集基线 | `android_app_baseline` | 安装 APK + 收集基线（Activity/package info/logcat/Frida 进程） |
+| 复制样本到 patches 目录 | `copy_sample_to_patches` | 复制样本到 patches 目录 |
+| 修改 smali 字节 | `patch_bytes` / `patch_pattern` | 修改 smali 字节 |
+| 安装修改后的 APK | `android_install_apk` | 安装修改后的 APK |
+| 读取现有笔记 | `workspace_read_text` | 读取现有笔记 |
+| 写入分析笔记 | `workspace_write_text` | 写入分析笔记 |

@@ -197,3 +197,15 @@ curl -s "https://target.com/openapi.json"
 curl -s "https://target.com/api-docs/swagger.json"
 curl -s "https://target.com/swagger-resources"
 ```
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击步骤：
+
+| 攻击步骤 | MCP 工具 | 说明 |
+|---------|---------|------|
+| HTTP header fuzzing / 路由探测 | `http_probe` | HTTP GET 探测，收集 header/body/cookie/服务器指纹 |
+| 目录爆破 / 强制浏览 | `run_ctf_tool dirsearch` | 运行 dirsearch 进行目录爆破 |
+| 参数发现 | `run_ctf_tool dirsearch` | 运行 dirsearch 进行参数发现 |
+| 技术栈指纹识别 | `http_probe` | 从 HTTP 响应头识别服务器/框架指纹 |
+| 知识检索 | `kb_router` | 按攻击信号搜索知识库技术文件 |

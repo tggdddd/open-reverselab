@@ -96,7 +96,7 @@ python scripts/misc/lab_healthcheck.py
 
 ## 知识库（kb/）
 
-13 个技术分类，60+ 文件，每篇包含可运行的伪代码：
+### Web CTF — 13 个技术分类，60+ 文件，每篇包含可运行的伪代码
 
 | 编号 | 分类 | 文件数 | 示例 |
 |---|---|---|---|
@@ -118,6 +118,36 @@ python scripts/misc/lab_healthcheck.py
 # 入口
 python scripts/ctf-website/kb_router.py "<信号>"
 ```
+
+### APK Reverse — 17 篇技术文件，8 个分类，Frida 可运行代码
+
+| 编号 | 分类 | 文件数 | 示例 |
+|---|---|---|---|
+| 01 | DEX/Java | 1 | Smali 注入 |
+| 02 | Native | 5 | IL2CPP offset 发现、UE4 offset 狩猎、指针链模式、内核 procfs 驱动、虚拟/物理内存 |
+| 03 | Manifest | 1 | 入口点追踪 |
+| 04 | Crypto | 2 | 游戏加密模式、RC4 自定义加密 |
+| 05 | Network | 2 | 游戏协议 Hook、许可证验证绕过 |
+| 06 | Dynamic | 3 | 内存读写 Hook、叠加层渲染 Hook、触摸输入 Hook |
+| 07 | Packer | 2 | 混淆检测、自解压 payload |
+| 08 | Patch/Repack | 1 | SO 注入重打包 |
+
+详见 [kb/apk-reverse/README.md](kb/apk-reverse/README.md)
+
+### PE Reverse — 9 篇技术文件，5 个分类有内容，C++/Frida 可运行代码
+
+| 编号 | 分类 | 文件数 | 示例 |
+|---|---|---|---|
+| 01 | Triage | 1 | AOB 特征码扫描 |
+| 02 | PE Structure | 1 | PE 头解析 |
+| 03 | Static Analysis | 2 | 结构体重建、反汇编/JIT 汇编 |
+| 04 | Dynamic Analysis | 3 | DLL 注入、Trampoline 劫持、外部内存读写 |
+| 05 | Crypto/Unpack | 1 | PE 脱壳/dump |
+| 06 | IOC Extraction | — | 待补充 |
+| 07 | YARA/Sigma | — | 待补充 |
+| 08 | Patch | 1 | 代码 Patch |
+
+详见 [kb/pe-reverse/techniques/README.md](kb/pe-reverse/techniques/README.md)
 
 ## 目录结构
 

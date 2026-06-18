@@ -127,3 +127,14 @@ plaintext = cipher.decrypt(ciphertext)
 Frida hook Cipher.init → 提取 key/iv/算法 → Python 离线解密验证
 → 内存中也异或: Frida hook XOR 点 → 确定 XOR key → 解密内存字段
 ```
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击链步骤：
+
+| 攻击链步骤 | MCP 工具 | 说明 |
+|-----------|---------|------|
+| Frida 抓 Cipher.init → key/iv/算法 → logcat 汇总 | `android_crypto_unpack_recipe` | 一键：Frida 抓 Cipher.init → key/iv/算法 → logcat 汇总 |
+| 从 key/IV/input/output 自动解密验证 | `solve_crypto_from_evidence` | 从 key/IV/input/output 自动解密验证 |
+| 生成可运行的 Python 解密复现脚本 | `make_crypto_replay_scaffold` | 生成可运行的 Python 解密复现脚本 |
+| 一键 parse → solve → replay scaffold → buffer carve | `postprocess_frida_crypto_result` | 一键 parse → solve → replay scaffold → buffer carve |

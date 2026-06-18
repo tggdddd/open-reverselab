@@ -141,3 +141,12 @@ PostMessage → XSS via data render → DOM injection → cookie steal
 ## Evidence
 
 记录: postMessage 发送的 origin/data、接收端 handler 代码、成功绕过的证明、OAuth token (脱敏)
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击步骤：
+
+| 攻击步骤 | MCP 工具 | 说明 |
+|---------|---------|------|
+| postMessage 端点探测 | `http_probe` | HTTP GET 探测 postMessage 监听端点 |
+| 知识检索 | `kb_router` | 按 postMessage 攻击信号搜索知识库 |

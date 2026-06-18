@@ -224,3 +224,13 @@ curl https://target.com/.well-known/openid-configuration | jq .
 ## Evidence
 
 记录: 完整流程每个 HTTP 请求/响应、redirect_uri payload、code/token/refresh_token、client_secret 来源、token 能访问的 API。
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击步骤：
+
+| 攻击步骤 | MCP 工具 | 说明 |
+|---------|---------|------|
+| OAuth endpoint 探测 | `http_probe` | HTTP GET 探测 OAuth/SSO 端点 |
+| 知识检索 | `kb_router` | 按攻击信号搜索知识库相关技术 |
+| 知识库文件读取 | `kb_read_file` | 读取知识库技术文件内容 |

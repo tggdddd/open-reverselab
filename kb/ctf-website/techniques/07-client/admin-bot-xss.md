@@ -226,3 +226,12 @@ XSS → Service Worker → 持久化中间人 → 全站劫持
 ## 证据
 
 记录: 注入点、完整 payload、CSP 头、sanitizer 版本、bot 类型(headless chrome/puppeteer/playwright)、外带通道、接收到的数据。
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击步骤：
+
+| 攻击步骤 | MCP 工具 | 说明 |
+|---------|---------|------|
+| XSS 入口探测 | `http_probe` | HTTP GET 探测 XSS 注入点 |
+| 知识检索 | `kb_router` | 按 XSS 攻击信号搜索知识库 |

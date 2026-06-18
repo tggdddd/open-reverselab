@@ -210,3 +210,12 @@ WebSocket → 时序攻击 → 先改状态再验证 → 竞态绕过
 ## Evidence
 
 记录: 握手请求头、Origin 头、收发消息的 JSON/text、修改字段后的响应差异、Socket.IO 房间/事件、竞态并发数和结果。
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击步骤：
+
+| 攻击步骤 | MCP 工具 | 说明 |
+|---------|---------|------|
+| WebSocket 端点探测 | `http_probe` | HTTP GET 探测 WebSocket 握手端点 |
+| 知识检索 | `kb_router` | 按 WebSocket 攻击信号搜索知识库 |

@@ -262,3 +262,12 @@ curl http://metadata.169.254.169.254.nip.io/latest/meta-data/
 ```
 ```
 
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击步骤：
+
+| 攻击步骤 | MCP 工具 | 说明 |
+|---------|---------|------|
+| SSRF 探测 | `http_probe` | 发送 SSRF payload |
+| 按信号查技术 | `kb_router` | 搜索 ssrf 相关技术文件 |
+

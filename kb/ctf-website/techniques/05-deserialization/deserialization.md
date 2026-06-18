@@ -287,3 +287,12 @@ map.put("lazyValue", new UIDefaults.ProxyLazyValue("javax.script.ScriptEngineMan
 
 记录: 原始序列化 hex/base64、识别出的格式、使用的 gadget 链、DNS callback 验证、最终命令执行结果
 
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击步骤：
+
+| 攻击步骤 | MCP 工具 | 说明 |
+|---------|---------|------|
+| 反序列化探测 | `http_probe` | 发送序列化 payload |
+| 按信号查技术 | `kb_router` | 搜索 deserialization 相关技术文件 |
+

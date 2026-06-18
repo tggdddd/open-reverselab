@@ -1008,3 +1008,12 @@ def detect_length_extension_attack(request_params: dict) -> bool:
 - Flask session 安全 (HMAC): HMAC 模式下免疫
 - SHA-3 规范: FIPS 202 (海绵结构)
 - BLAKE2 RFC 7693
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击步骤：
+
+| 攻击步骤 | MCP 工具 | 说明 |
+|---------|---------|------|
+| 长度扩展攻击探测 | `http_probe` | HTTP GET 探测长度扩展攻击入口 |
+| 知识检索 | `kb_router` | 按长度扩展攻击信号搜索知识库 |

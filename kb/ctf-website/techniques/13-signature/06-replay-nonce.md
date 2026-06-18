@@ -1441,3 +1441,12 @@ def secure_signature_verification(key: bytes, nonce: str, ts: int, data: dict, r
 - OCSP Stapling: nonce 防重放
 
 > 记住：一个被接受的重复请求就是一个漏洞。不要假设客户端会「守规矩」只发一次。每次收到签名的请求，都要假定这是重放。
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击步骤：
+
+| 攻击步骤 | MCP 工具 | 说明 |
+|---------|---------|------|
+| 重放攻击探测 | `http_probe` | HTTP GET 探测重放攻击入口 |
+| 知识检索 | `kb_router` | 按重放/nonce 攻击信号搜索知识库 |

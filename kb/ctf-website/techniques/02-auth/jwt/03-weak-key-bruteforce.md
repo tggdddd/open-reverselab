@@ -200,3 +200,12 @@ go run github.com/Sjord/jwt-cracker@latest "<token>"
 | 常见单词 | `secret` | < 1 秒（字典命中） |
 | 12 位随机 alphanum | `aB3xK9mP2qW7` | ~ 数年 |
 | 256-bit 随机 | (32 random bytes) | 不可行 |
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击步骤：
+
+| 攻击步骤 | MCP 工具 | 说明 |
+|---------|---------|------|
+| JWT 弱密钥爆破 | `run_ctf_tool jwt_tool` | 使用 jwt_tool 进行密钥爆破 |
+| Token 验证 | `http_probe` | HTTP GET 探测验证破解 token 效果 |

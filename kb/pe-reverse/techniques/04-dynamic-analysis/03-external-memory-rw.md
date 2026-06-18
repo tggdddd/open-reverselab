@@ -175,3 +175,11 @@ void FreeExecutable(void* addr) {
 → ReadProcessMemory 读取数据 → WriteProcessMemory 修改值
 → CloseHandle 清理
 ```
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击链步骤：
+
+| 攻击链步骤 | MCP 工具 | 说明 |
+|-----------|---------|------|
+| 验证内存读写结果 | `toolbox_launch(x64dbg)` | 验证内存读写结果 |

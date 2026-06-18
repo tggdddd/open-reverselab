@@ -134,3 +134,11 @@ service.dispatchGesture(builder.build(), null, null);
 → Hook MotionEvent.obtain 获取注入坐标 → 分析模式 (平滑度/间隔)
 → 追踪注入源进程 → 确定是否有 overlay + touch 联动
 ```
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击链步骤：
+
+| 攻击链步骤 | MCP 工具 | 说明 |
+|-----------|---------|------|
+| Frida Hook InputManager/MotionEvent | `android_frida_run_script` | 运行 Frida Hook InputManager/MotionEvent |

@@ -398,3 +398,12 @@ await page.pdf({path: 'output.pdf'});
 ## Evidence
 
 记录: 上传文件路径/扩展名、XXE 实体 payload、LFI 成功读取的文件内容前 200 字节、RFI callback IP/时间
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击步骤：
+
+| 攻击步骤 | MCP 工具 | 说明 |
+|---------|---------|------|
+| 文件上传/LFI 探测 | `http_probe` | 探测上传端点/路径遍历 |
+| 按信号查技术 | `kb_router` | 搜索 file upload / xxe / lfi 相关技术文件 |

@@ -210,3 +210,13 @@ wappalyzer https://target.com
 # 从 JS bundle 提取依赖
 curl -s https://target.com/main.js | grep -oP '"[^"]+"' | grep -E '^"[@a-z]' | sort -u
 ```
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击步骤：
+
+| 攻击步骤 | MCP 工具 | 说明 |
+|---------|---------|------|
+| HTTP 版本/服务器指纹收集 | `http_probe` | HTTP GET 探测，收集 Server/Header 指纹 |
+| 指纹 → CVE 联动搜索 | `kb_router` | 按指纹信号查相关 CVE 技术 |
+| 知识库检索 | `kb_read_file` | 读取知识库技术文件内容 |

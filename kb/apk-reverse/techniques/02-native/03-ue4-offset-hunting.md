@@ -127,3 +127,12 @@ UE4 游戏 → UE4Dumper dump SDK → 定位 GWorld/GObject 全局偏移
 → search libUE4.so strings 找类名 → 验证 Actor 继承链 → 确定关键属性偏移
 → Frida 脚本遍历 Actor 列表 → 验证血量/坐标变化 → 锁定最终偏移
 ```
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击链步骤：
+
+| 攻击链步骤 | MCP 工具 | 说明 |
+|-----------|---------|------|
+| Frida 枚举 GNames/GObjects | `android_frida_run_script` | 运行 Frida 脚本枚举 GNames/GObjects |
+| 分析 libUE4.so | `ghidra_headless_analyze` | 分析 libUE4.so |

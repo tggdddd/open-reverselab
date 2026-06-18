@@ -137,3 +137,13 @@ def encrypt_params(params: dict, key: bytes) -> str:
 → Frida Hook 加密函数入口 dump key → Python 离线复现验证
 → 确定密钥来源 (硬编码/服务器下发/md5派生) → 写出完整加解密流程
 ```
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击链步骤：
+
+| 攻击链步骤 | MCP 工具 | 说明 |
+|-----------|---------|------|
+| Frida 抓加密函数入口 dump key/input/output | `android_crypto_unpack_recipe` | Frida 抓加密函数入口 dump key/input/output |
+| 分析 native 加密函数 | `ghidra_headless_analyze` | 分析 native 加密函数 |
+| 自动验证 RC4/Custom 解密 | `solve_crypto_from_evidence` | 自动验证 RC4/Custom 解密 |

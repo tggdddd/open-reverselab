@@ -216,3 +216,13 @@ Ghidra 定位目标函数 → 确定 detourLen ≥ 5 → 编写 Naked 函数
 → VirtualAlloc 分配 gateway → 写入 pushad→call→popad→orig→jmp
 → Detour32 安装 JMP → GetAsyncKeyState 热键控制 → 退出前恢复
 ```
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击链步骤：
+
+| 攻击链步骤 | MCP 工具 | 说明 |
+|-----------|---------|------|
+| 定位目标函数 | `ghidra_headless_analyze` | 定位目标函数 |
+| 查看函数参数和调用约定 | `ghidra_summary_function_detail` | 查看函数参数和调用约定 |
+| 生成 hook stub 机器码 | `rizin_assemble_bytes` | 生成 hook stub 机器码 |

@@ -249,3 +249,12 @@ s=base64.urlsafe_b64encode(hmac.new(b'',f'{h}.{p}'.encode(),hashlib.sha256).dige
 print(f'{h}.{p}.{s}')
 "
 ```
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击步骤：
+
+| 攻击步骤 | MCP 工具 | 说明 |
+|---------|---------|------|
+| KID 注入攻击 | `run_ctf_tool jwt_tool` | 使用 jwt_tool 修改 JWT kid 头 |
+| 知识检索 | `kb_router` | 按 KID 注入信号搜索相关技术 |

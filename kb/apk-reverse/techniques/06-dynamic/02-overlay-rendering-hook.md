@@ -100,3 +100,12 @@ adb shell dumpsys SurfaceFlinger                         # 列 Layer
 → 确定图形后端 (Vulkan/GLES) → hook 对应端 swap/present
 → 定位 ImGui 帧循环 → 分析 UI 逻辑 → 提取显示数据/绘制参数
 ```
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击链步骤：
+
+| 攻击链步骤 | MCP 工具 | 说明 |
+|-----------|---------|------|
+| Frida Hook ANativeWindow/eglSwapBuffers | `android_frida_run_script` | 运行 Frida Hook ANativeWindow/eglSwapBuffers |
+| 抓取截图验证 overlay 效果 | `android_capture_screenshot` | 抓取截图验证 overlay 效果 |

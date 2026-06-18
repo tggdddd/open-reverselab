@@ -1858,3 +1858,12 @@ if __name__ == "__main__":
 - [XML Signature Wrapping — OWASP](https://owasp.org/www-pdf-archive/XML_Signature_Wrapping.pdf)
 - [PHP ksort vs JavaScript Object.keys](https://www.php.net/manual/en/function.ksort.php)
 - [HTTP Parameter Pollution — OWASP](https://owasp.org/www-community/attacks/HTTP_Parameter_Pollution)
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击步骤：
+
+| 攻击步骤 | MCP 工具 | 说明 |
+|---------|---------|------|
+| 规范化绕过探测 | `http_probe` | HTTP GET 探测签名规范化差异 |
+| 知识检索 | `kb_router` | 按规范化攻击信号搜索知识库 |

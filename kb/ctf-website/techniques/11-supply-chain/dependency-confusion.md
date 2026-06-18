@@ -155,3 +155,12 @@ Manifest/tarball 不一致 → 绕过 npm audit → CI 信任 → install RCE
 ## Evidence
 
 记录: 枚举到的内部包名、发布的恶意包版本、CI runner 环境变量列表、外带的数据
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击步骤：
+
+| 攻击步骤 | MCP 工具 | 说明 |
+|---------|---------|------|
+| 依赖混淆探测 | `http_probe` | HTTP GET 探测包管理器注册表端点 |
+| 知识检索 | `kb_router` | 按依赖混淆信号搜索知识库 |

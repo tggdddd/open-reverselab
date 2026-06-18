@@ -148,3 +148,12 @@ SAML Response Replay → 过期/重用 → 重放攻击
 ## Evidence
 
 记录: 原始 SAML Response (Base64)、解码后的 XML、注入的恶意 Assertion、签名验证结果、最终 SP 接受的用户身份
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击步骤：
+
+| 攻击步骤 | MCP 工具 | 说明 |
+|---------|---------|------|
+| SAML endpoint 探测 | `http_probe` | HTTP GET 探测 SAML SSO 端点 |
+| 知识检索 | `kb_router` | 按攻击信号搜索知识库相关技术 |

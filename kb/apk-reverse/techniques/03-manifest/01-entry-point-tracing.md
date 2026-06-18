@@ -123,3 +123,13 @@ aapt 提取 Manifest → 锁定 Application/LAUNCHER Activity
 → readelf -d 提取 init_array → 用 Frida 在 JNI_OnLoad 前 Hook
 → 确定完整的执行路径 → 按入口点优先级进行逆向
 ```
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击链步骤：
+
+| 攻击链步骤 | MCP 工具 | 说明 |
+|-----------|---------|------|
+| 一键收集 Activity/package info/manifest | `android_app_baseline` | 一键收集 Activity/package info/manifest |
+| 导出 dumpsys package（权限/组件/intent-filter） | `android_package_info` | 导出 dumpsys package（权限、组件、intent-filter） |
+| Hook Application.onCreate / JNI_OnLoad | `android_frida_run_script` | Hook Application.onCreate / JNI_OnLoad |

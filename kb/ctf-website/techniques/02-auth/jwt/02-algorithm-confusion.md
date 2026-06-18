@@ -183,3 +183,12 @@ key = RSAAlgorithm.from_jwk(open('jwk.json').read())
 print(key.export_key().decode())
 "
 ```
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击步骤：
+
+| 攻击步骤 | MCP 工具 | 说明 |
+|---------|---------|------|
+| JWT 算法混淆攻击 | `run_ctf_tool jwt_tool` | 使用 jwt_tool 进行 RS→HS 算法混淆 |
+| 公钥探测 | `http_probe` | HTTP GET 探测公钥文件位置 |

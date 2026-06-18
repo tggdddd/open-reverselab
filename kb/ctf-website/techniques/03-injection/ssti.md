@@ -231,3 +231,13 @@ SSTI → WAF bypass → request.args 外带 → 盲注式外带 flag
 
 记录: 算数验证、引擎类型、最终链地址 (如 `__subclasses__()[132]` 的 index)、成功执行结果、绕过手法
 
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击步骤：
+
+| 攻击步骤 | MCP 工具 | 说明 |
+|---------|---------|------|
+| 探测模板注入 | `http_probe` | 发送 SSTI payload 探测 |
+| 模板注入检测 | `run_ctf_tool tplmap` | 自动检测 SSTI |
+| 按信号查技术 | `kb_router` | 搜索 ssti 相关技术文件 |
+

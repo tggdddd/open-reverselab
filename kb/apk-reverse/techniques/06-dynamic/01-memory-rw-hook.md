@@ -68,3 +68,12 @@ ioctl(fd, 601, &copy_mem_struct);  // 自定义 cmd=601
 → 如果是 readv: dump 读取的地址和内容 → 逆推数据结构
 → 如果是 ioctl: 分析内核模块 → 提取驱动通信协议 → 复现读写逻辑
 ```
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击链步骤：
+
+| 攻击链步骤 | MCP 工具 | 说明 |
+|-----------|---------|------|
+| Frida Hook process_vm_readv/writev | `android_frida_run_script` | 运行 Frida Hook process_vm_readv/writev |
+| 渲染 memory hook 模板 | `android_frida_render_template` | 渲染 memory hook 模板 |

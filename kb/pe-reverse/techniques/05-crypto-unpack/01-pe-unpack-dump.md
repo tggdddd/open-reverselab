@@ -169,3 +169,13 @@ DiE 检测壳类型 → 确定脱壳策略
 → VMProtect/Themida: Frida attach → dump 内存中解密模块
 → 加载 dump 到 Ghidra → 确认代码可读 → 开始静态分析
 ```
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击链步骤：
+
+| 攻击链步骤 | MCP 工具 | 说明 |
+|-----------|---------|------|
+| DiE 检测壳签名 | `die_scan` | DiE 检测壳签名 |
+| 一键生成脱壳动态分析包 | `make_pe_crypto_unpack_plan` | **一键生成脱壳动态分析包**（x64dbg 断点 + Frida hook + 函数队列） |
+| 从 dump buffer 自动 carve PE payload | `carve_payloads_from_dump` | 从 dump buffer 自动 carve PE payload → `samples/unpacked/` |

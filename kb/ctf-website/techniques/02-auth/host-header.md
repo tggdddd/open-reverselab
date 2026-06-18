@@ -111,3 +111,12 @@ python scripts/ctf-website/http_probe.py
 # 安装第三方工具
 powershell scripts/ctf-website/install_missing_tools.ps1
 ```
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击步骤：
+
+| 攻击步骤 | MCP 工具 | 说明 |
+|---------|---------|------|
+| Host header 注入探测 | `http_probe` | HTTP GET 探测，验证 Host header 篡改效果 |
+| 路由绕过验证 | `http_probe` | 探测 X-Forwarded-Host/X-Real-IP 等 header 效果 |

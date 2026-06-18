@@ -98,3 +98,11 @@ LDAP filter injection → (&(uid=*)(memberOf=cn=admin,ou=groups)) → 提权
 ## Evidence
 
 记录: LDAP filter payload、盲注的字符匹配日志、提取出的属性值、JNDI 外连日志
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击步骤：
+
+| 攻击步骤 | MCP 工具 | 说明 |
+|---------|---------|------|
+| LDAP 注入端点探测 | `http_probe` | HTTP GET 探测 LDAP 查询端点 |

@@ -102,3 +102,14 @@ console.log("root:", root)
 APK → 确认 Unity+IL2CPP → 提取 global-metadata.dat → Il2CppInspector/Ghidra 解析
 → 定位静态区基址偏移 → 指针链追踪 → Frida 动态验证 → 锁定数据结构
 ```
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击链步骤：
+
+| 攻击链步骤 | MCP 工具 | 说明 |
+|-----------|---------|------|
+| Ghidra 导入+自动分析 SO/DLL | `ghidra_headless_analyze` | 无头 Ghidra 导入+自动分析 SO/DLL |
+| 函数阅读优先级推荐 | `ghidra_summary_call_focus` | 按行为推荐函数阅读优先级 |
+| Frida 动态验证偏移 | `android_frida_run_script` | 运行 Frida 脚本验证偏移 |
+| SO/DLL 初筛 | `triage_pe` | SO/DLL 初筛（hash/DiE/节区/导入表/字符串） |

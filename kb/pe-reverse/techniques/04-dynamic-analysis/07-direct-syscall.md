@@ -183,3 +183,11 @@ NtAVM(hProc, &addr, 0, &size, MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE);
 → 汇编或 Xbyak 生成 stub → VirtualAlloc 分配 EXECUTE_READWRITE
 → 直接调用 stub 绕过用户态 Hook
 ```
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击链步骤：
+
+| 攻击链步骤 | MCP 工具 | 说明 |
+|-----------|---------|------|
+| 生成 syscall stub 机器码 | `rizin_assemble_bytes` | 生成 syscall stub 机器码 |

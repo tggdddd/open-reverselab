@@ -507,3 +507,11 @@ flowchart TD
   URL --> SSRF["SSRF/CVE/RCE"] --> Flag
 ```
 
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击步骤：
+
+| 攻击步骤 | MCP 工具 | 说明 |
+|---------|---------|------|
+| 支付逻辑 API 探测 | `http_probe` | HTTP GET 探测支付逻辑接口端点 |
+| 知识检索 | `kb_router` | 按支付逻辑漏洞信号搜索知识库 |

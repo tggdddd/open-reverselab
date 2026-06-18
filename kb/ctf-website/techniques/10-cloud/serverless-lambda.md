@@ -135,3 +135,12 @@ Lambda → sts:AssumeRole → 跨账户提权 → 组织级访问
 ## Evidence
 
 记录: 提取的 IAM credential (脱敏)、env 变量列表、Runtime API 响应、IAM permission 枚举结果
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击步骤：
+
+| 攻击步骤 | MCP 工具 | 说明 |
+|---------|---------|------|
+| Serverless 端点探测 | `http_probe` | HTTP GET 探测 serverless Lambda 端点 |
+| 知识检索 | `kb_router` | 按 serverless 攻击信号搜索知识库 |

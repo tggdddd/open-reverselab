@@ -187,3 +187,13 @@ for (auto& p : patches) {
 → Frida: 替换/Hook 反调试函数 → 或 Patch 检测代码为 NOP
 → 验证目标不再闪退
 ```
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击链步骤：
+
+| 攻击链步骤 | MCP 工具 | 说明 |
+|-----------|---------|------|
+| 搜索 antidebug 行为函数 | `ghidra_summary_call_focus` | 搜索 antidebug 行为函数（behavior="antidebug"） |
+| 在反调试 API 处自动生成断点 | `make_x64dbg_breakpoint_script` | 在反调试 API 处自动生成断点（presets="antidebug"） |
+| 生成包含反调试绕过的动态分析包 | `make_pe_crypto_unpack_plan` | 生成包含反调试绕过的动态分析包 |

@@ -1131,3 +1131,12 @@ graph TD
     PRIV --> FLAG
     KEY --> FLAG
 ```
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击步骤：
+
+| 攻击步骤 | MCP 工具 | 说明 |
+|---------|---------|------|
+| PHP 支付 API 探测 | `http_probe` | HTTP GET 探测 PHP 支付接口端点 |
+| 知识检索 | `kb_router` | 按 PHP 支付漏洞信号搜索知识库 |

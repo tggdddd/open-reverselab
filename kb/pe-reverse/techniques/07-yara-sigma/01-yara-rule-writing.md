@@ -178,3 +178,13 @@ v2.0: 改为行为特征 (导入表 + 代码模式) → 覆盖更多变种
 → 提取 PE 结构特征 → 编写 YARA 规则
 → yara64 扫描样本集测试 → 调整避免误报 → 部署规则
 ```
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击链步骤：
+
+| 攻击链步骤 | MCP 工具 | 说明 |
+|-----------|---------|------|
+| 提取 IOC 作为 YARA/Sigma 素材 | `extract_iocs_from_summary` | 提取 IOC 作为 YARA/Sigma 素材 |
+| 自动生成 YARA 规则草案 | `make_yara_stub` | 自动生成 YARA 规则草案 → `exports/windows/yara/` |
+| 自动生成 Sigma 规则草案 | `make_sigma_stub` | 自动生成 Sigma 规则草案 → `exports/windows/sigma/` |

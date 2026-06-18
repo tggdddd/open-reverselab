@@ -130,3 +130,13 @@ root 权限确认 → uname -r 检测内核版本 → 匹配对应 .ko → insmo
 → /proc 节点创建 → 用户态 open 节点 → write 读请求 → read 取结果
 → 卸载前 dmesg -c 清日志 → rmmod 卸载
 ```
+
+## MCP 工具映射
+
+AI Agent 可调用以下 MCP 工具自动完成或加速上述攻击链步骤：
+
+| 攻击链步骤 | MCP 工具 | 说明 |
+|-----------|---------|------|
+| 确保 ADB 连接 | `android_adb_connect` | 确保 ADB 连接 |
+| 确认设备 root 状态 | `android_device_info` | 确认设备 root 状态 |
+| 推送 .ko 文件到设备 | `android_push_file` | 推送 .ko 文件到设备 |
