@@ -2,6 +2,8 @@
 
 开源逆向工程实验环境。目录即约定，Agent 原生。
 
+> [English version](README.en.md)
+
 ## 路由
 
 ```
